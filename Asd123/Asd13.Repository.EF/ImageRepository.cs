@@ -54,6 +54,7 @@ namespace Asd13.Repository.EF
             await queue.AddMessageAsync(message);
 
             var resultqueue = queueClient.GetQueueReference("imageprocessresult");
+            await queue.CreateIfNotExistsAsync();
             var result = await resultqueue.GetMessageAsync();
             var definition = new { imageinfoid = "", tags = "" };
             var t = JsonConvert.DeserializeAnonymousType(result.AsString, definition);
