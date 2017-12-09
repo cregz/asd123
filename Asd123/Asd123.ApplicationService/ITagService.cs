@@ -10,9 +10,9 @@ namespace Asd123.ApplicationService
     {
         Task<Tag> GetByText(string text);
         Task<Tag> GetById(Guid id);
-        Task<IReadOnlyCollection<Tag>> GetByPicture(Guid pictureId);
-        Task AddToPicture(IEnumerable<string> texts, IEnumerable<Guid> pictureIds);
-        Task RemoveFromPicture(IEnumerable<string> texts, IEnumerable<Guid> pictureIds);
+        Task<IEnumerable<Tag>> GetByPicture(ImageInfo picture);
+        Task AddToPicture(IEnumerable<string> texts, IEnumerable<ImageInfo> pictures);
+        Task RemoveFromPicture(IEnumerable<string> texts, IEnumerable<ImageInfo> pictures);
         Task<Tag> CreateTag(string text);
         Task DeleteTag(Tag tag);
     }

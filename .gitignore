@@ -14,3 +14,9 @@
 /Asd123/Asd123.ApplicationService/bin/*
 /Asd123/Asd123.Domain/bin/*
 /Asd123/Asd13.Repository.EF/Migrations
+/Asd123/AsdWebJob123/bin
+/Asd123/AsdWebJob123/obj/Release
+/Asd123/AsdWebJob123/AsdWebJob123.csproj.user
+/Asd123/packages
+/Asd123/AsdWebJob123/obj/Debug
+/Asd123/AsdWebJob123/Properties/PublishProfiles

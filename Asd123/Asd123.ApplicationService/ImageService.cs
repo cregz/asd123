@@ -1,5 +1,6 @@
 ﻿using Asd123.Domain;
 using Asd13.Repository.EF;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,6 @@ namespace Asd123.ApplicationService
         public async Task<Uri> UploadImage(byte[] imageBytes, User uploader, string name)
         {
             ImageUploadResult result = await imageRepo.UploadImage(imageBytes);
-            await imageRepo.EnqueueWorkItem(result.ImageId);
             ImageInfo info = new ImageInfo()
             {
                 ImageId = result.ImageId.ToString(),
@@ -34,6 +34,8 @@ namespace Asd123.ApplicationService
                 Name = name
             };
             await imageRepo.Create(info);
+            var t = new { imageinfoid = info.Id.ToString(), imageurl = info.ImageUri };
+            await imageRepo.EnqueueWorkItem(JsonConvert.SerializeObject(t));
             return result.ImageUri;
         }
     }

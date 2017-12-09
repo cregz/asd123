@@ -13,5 +13,7 @@ namespace Asd13.Repository.EF
         Task<Tag> FindByIdentifier(Guid id);
         Task Delete(Guid id);
         Task<IReadOnlyCollection<Tag>> FindAll(Expression<Func<Tag, bool>> filterExpression);
+        Task Update(Tag tag);
+        Task<IEnumerable<Tag>> FindByPicture(Guid picId);
     }
 }

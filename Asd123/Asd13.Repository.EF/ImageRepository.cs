@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Queue;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,14 +44,19 @@ namespace Asd13.Repository.EF
             };
         }
 
-        public async Task EnqueueWorkItem(Guid imageId)
+        public async Task EnqueueWorkItem(string imageUrl)
         {
             // TODO: error handling + retry policy
             var queueClient = storageAccount.CreateCloudQueueClient();
             var queue = queueClient.GetQueueReference("imageprocess");
             await queue.CreateIfNotExistsAsync();
-            var message = new CloudQueueMessage(imageId.ToString());
+            var message = new CloudQueueMessage(imageUrl);
             await queue.AddMessageAsync(message);
+
+            var resultqueue = queueClient.GetQueueReference("imageprocessresult");
+            var result = await resultqueue.GetMessageAsync();
+            var definition = new { imageinfoid = "", tags = "" };
+            var t = JsonConvert.DeserializeAnonymousType(result.AsString, definition);
         }
 
         public async Task<ImageInfo> FindByIdentifier(string imageIdentifier)
