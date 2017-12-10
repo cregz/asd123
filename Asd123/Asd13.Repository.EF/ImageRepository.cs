@@ -44,7 +44,7 @@ namespace Asd13.Repository.EF
             };
         }
 
-        public async Task EnqueueWorkItem(string imageUrl)
+        public async Task<string> EnqueueWorkItem(string imageUrl)
         {
             // TODO: error handling + retry policy
             var queueClient = storageAccount.CreateCloudQueueClient();
@@ -53,11 +53,13 @@ namespace Asd13.Repository.EF
             var message = new CloudQueueMessage(imageUrl);
             await queue.AddMessageAsync(message);
 
+            
             var resultqueue = queueClient.GetQueueReference("imageprocessresult");
             await queue.CreateIfNotExistsAsync();
             var result = await resultqueue.GetMessageAsync();
-            var definition = new { imageinfoid = "", tags = "" };
-            var t = JsonConvert.DeserializeAnonymousType(result.AsString, definition);
+            string returnVal = result.AsString;
+            await resultqueue.DeleteMessageAsync(result);
+            return returnVal;
         }
 
         public async Task<ImageInfo> FindByIdentifier(string imageIdentifier)

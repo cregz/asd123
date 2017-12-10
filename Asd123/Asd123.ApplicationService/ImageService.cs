@@ -12,10 +12,14 @@ namespace Asd123.ApplicationService
     public class ImageService : IImageService
     {
         private IImageRepository imageRepo;
+        private ITagRepository tagRepo;
+        private ITagService tagService;
 
-        public ImageService(IImageRepository imageRepo)
+        public ImageService(IImageRepository imageRepo, ITagRepository tagRepo, ITagService tagService)
         {
             this.imageRepo = imageRepo;
+            this.tagRepo = tagRepo;
+            this.tagService = tagService;
         }
 
         public async Task<IReadOnlyCollection<ImageInfo>> FetchImagesOfUser(User user)
@@ -35,7 +39,13 @@ namespace Asd123.ApplicationService
             };
             await imageRepo.Create(info);
             var t = new { imageinfoid = info.Id.ToString(), imageurl = info.ImageUri };
-            await imageRepo.EnqueueWorkItem(JsonConvert.SerializeObject(t));
+            var res = await imageRepo.EnqueueWorkItem(JsonConvert.SerializeObject(t));
+            var definition = new { image = "", tags = new List<string>() };
+            var objs = JsonConvert.DeserializeAnonymousType(res, definition);
+            var imageInfo = (await imageRepo.FindAll(x => x.Id.ToString() == objs.image)).FirstOrDefault();
+
+            //await tagService.AddToPicture(objs.tags, new List<ImageInfo>() { imageInfo });
+
             return result.ImageUri;
         }
     }

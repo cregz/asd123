@@ -10,7 +10,7 @@ namespace Asd13.Repository.EF
     public interface IImageRepository
     {
         Task<ImageUploadResult> UploadImage(byte[] imageBytes);
-        Task EnqueueWorkItem(string imageUrl);
+        Task<string> EnqueueWorkItem(string imageUrl);
 
         Task Create(ImageInfo entity);
         Task<ImageInfo> FindByIdentifier(string userIdentifier);
