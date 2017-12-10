@@ -54,21 +54,21 @@ namespace Asd13.Repository.EF
             await queue.AddMessageAsync(message);
 
             
-            var resultqueue = queueClient.GetQueueReference("imageprocessresult");
-            CloudQueueMessage result = null;
-            int i = 0;
-            do
-            {
-                await Task.Delay(10);
-                result = await resultqueue.GetMessageAsync();
-                i++;
-            } while (result == null && i< 10);
-            if (result != null)
-            {
-                string returnVal = result.AsString;
-                await resultqueue.DeleteMessageAsync(result);
-                return returnVal;
-            }
+            //var resultqueue = queueClient.GetQueueReference("imageprocessresult");
+            //CloudQueueMessage result = null;
+            //int i = 0;
+            //do
+            //{
+            //    await Task.Delay(10);
+            //    result = await resultqueue.GetMessageAsync();
+            //    i++;
+            //} while (result == null && i< 10);
+            //if (result != null)
+            //{
+            //    string returnVal = result.AsString;
+            //    await resultqueue.DeleteMessageAsync(result);
+            //    return returnVal;
+            //}
             return null;
         }
 
