@@ -55,11 +55,21 @@ namespace Asd13.Repository.EF
 
             
             var resultqueue = queueClient.GetQueueReference("imageprocessresult");
-            await queue.CreateIfNotExistsAsync();
-            var result = await resultqueue.GetMessageAsync();
-            string returnVal = result.AsString;
-            await resultqueue.DeleteMessageAsync(result);
-            return returnVal;
+            CloudQueueMessage result = null;
+            int i = 0;
+            do
+            {
+                await Task.Delay(10);
+                result = await resultqueue.GetMessageAsync();
+                i++;
+            } while (result == null && i< 10);
+            if (result != null)
+            {
+                string returnVal = result.AsString;
+                await resultqueue.DeleteMessageAsync(result);
+                return returnVal;
+            }
+            return null;
         }
 
         public async Task<ImageInfo> FindByIdentifier(string imageIdentifier)

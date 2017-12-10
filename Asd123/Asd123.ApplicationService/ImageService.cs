@@ -40,11 +40,14 @@ namespace Asd123.ApplicationService
             await imageRepo.Create(info);
             var t = new { imageinfoid = info.Id.ToString(), imageurl = info.ImageUri };
             var res = await imageRepo.EnqueueWorkItem(JsonConvert.SerializeObject(t));
-            var definition = new { image = "", tags = new List<string>() };
-            var objs = JsonConvert.DeserializeAnonymousType(res, definition);
-            var imageInfo = (await imageRepo.FindAll(x => x.Id.ToString() == objs.image)).FirstOrDefault();
+            if (res != null)
+            {
+                var definition = new { image = "", tags = new List<string>() };
+                var objs = JsonConvert.DeserializeAnonymousType(res, definition);
+                var imageInfo = (await imageRepo.FindAll(x => x.Id.ToString() == objs.image)).FirstOrDefault();
 
-            //await tagService.AddToPicture(objs.tags, new List<ImageInfo>() { imageInfo });
+                await tagService.AddToPicture(objs.tags, new List<ImageInfo>() { imageInfo });
+            }
 
             return result.ImageUri;
         }

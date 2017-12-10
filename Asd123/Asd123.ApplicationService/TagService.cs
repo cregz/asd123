@@ -28,6 +28,7 @@ namespace Asd123.ApplicationService
                 }
                 foreach (var pic in pictures)
                 {
+                    tag.PictureTags = new List<PictureTag>();
                     tag.PictureTags.Add(new PictureTag
                     {
                         Tag = tag,
