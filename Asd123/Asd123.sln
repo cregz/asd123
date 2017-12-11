@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asd123.ApplicationService",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsdWebJob123", "AsdWebJob123\AsdWebJob123.csproj", "{D4F17C9F-FF20-46B6-BE78-FE313A195D60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "UnitTestProject1\Test.csproj", "{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{D4F17C9F-FF20-46B6-BE78-FE313A195D60}.Release|x64.Build.0 = Release|Any CPU
 		{D4F17C9F-FF20-46B6-BE78-FE313A195D60}.Release|x86.ActiveCfg = Release|Any CPU
 		{D4F17C9F-FF20-46B6-BE78-FE313A195D60}.Release|x86.Build.0 = Release|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Debug|x64.Build.0 = Debug|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Debug|x86.Build.0 = Debug|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Release|x64.ActiveCfg = Release|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Release|x64.Build.0 = Release|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Release|x86.ActiveCfg = Release|Any CPU
+		{D7DEE0D4-1E25-4EF2-A66E-872D9E2C47CF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
